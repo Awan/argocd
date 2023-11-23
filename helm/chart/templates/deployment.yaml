@@ -35,5 +35,6 @@ spec:
       protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: 80
+      nodePort: {{ .Values.service.nodePort }}  # Use the specified host port
   type: {{ .Values.service.type }}
 
