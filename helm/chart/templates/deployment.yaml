@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "my-nginx-chart.fullname" . }}
+  name: {{ .Release.Name }}
   labels:
-    app: {{ include "my-nginx-chart.name" . }}
+    app: {{ .Chart.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "my-nginx-chart.name" . }}
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "my-nginx-chart.name" . }}
+        app: {{ .Chart.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -29,7 +29,7 @@ metadata:
   name: {{ .Values.service.name }}
 spec:
   selector:
-    app: {{ include "my-nginx-chart.name" . }}
+    app: {{ .Chart.Name }}
   ports:
     - name: http
       protocol: TCP
