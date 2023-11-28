@@ -12,6 +12,20 @@ kubectl port-forward service/argocd-server -n argocd 8080:443
 
 Now you can access argocd on https://localhost:8080
 
+Or if you're installing it on EKS or some other platform, you have to patch 
+service file:
+
+```bash
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+
+After patching it, you can get the IP address using:
+
+```bash
+kubectl -n argocd get svc
+```
+and check for external IP.
+
 ### Password and login from CLI
 
 ```bash
